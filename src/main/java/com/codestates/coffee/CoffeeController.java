@@ -13,11 +13,13 @@ public class CoffeeController {
     @PostMapping
     public ResponseEntity postCoffee(@RequestParam("korName") String korName,
                                      @RequestParam("engName") String engName,
-                                     @RequestParam("price") int price) {
+                                     @RequestParam("price") int price,
+                                     @RequestParam("coffeeId") long coffeeId) {
         Map<String, Object> map = new HashMap<>();
         map.put("korName", korName);
         map.put("engName", engName);
         map.put("price", price);
+        map.put("coffeeId", coffeeId);
 
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
@@ -43,5 +45,28 @@ public class CoffeeController {
 
     //---------------- 여기서 부터 아래에 코드를 구현하세요! -------------------//
     // 1. 커피 정보 수정을 위한 핸들러 메서드 구현
-    // 2. 커피피 정보 삭제를 위한 핸들러 서드 구현
+    // 2. 커피피 정보 삭제를 위한 핸들러 메서드 구현
+
+//    커피 정보 수정
+    @PatchMapping("/{coffeeId}")
+    public ResponseEntity patchCoffees(@RequestParam("korName") String korName,
+                                       @RequestParam("engName") String engName,
+                                       @RequestParam("price") int price,
+                                       @RequestParam("coffeeId") long coffeeId){
+        Map<String, Object> map = new HashMap<>();
+        map.put("coffeeId", coffeeId);
+        map.put("korName", korName);
+        map.put("engName", engName);
+        map.put("price", price);
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+
+    }
+
+    // 커피 정보 삭제
+    @DeleteMapping("/{coffeeId}")
+    public ResponseEntity deleteCoffees(@PathVariable("coffeeId") long coffeeId){
+
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
