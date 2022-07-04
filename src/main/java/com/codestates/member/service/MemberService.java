@@ -4,6 +4,9 @@ import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.entity.Member;
 import com.codestates.member.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,9 +48,9 @@ public class MemberService {
         return findVerifiedMember(memberId);
     }
 
-    public List<Member> findMembers() {
+    public Page<Member> findMembers(int page, int size) {
         // TODO 페이지네이션을 적용하세요!
-        return (List<Member>) memberRepository.findAll();
+        return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
 
     public void deleteMember(long memberId) {
