@@ -1,5 +1,6 @@
 package com.codestates.member.entity;
 
+import com.codestates.member.Stamp;
 import com.codestates.order.entity.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToOne(mappedBy = "member")
+    private Stamp stamp;
+
+
     public Member(String email) {
         this.email = email;
     }
@@ -54,6 +59,10 @@ public class Member {
 
     public void addOrder(Order order) {
         orders.add(order);
+    }
+
+    public void setStamp(Stamp stamp) {
+        this.stamp = stamp;
     }
 
     // 추가 된 부분
