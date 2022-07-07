@@ -54,11 +54,13 @@ public interface OrderMapper {
         return orderCoffees
                 .stream()
                 .map(orderCoffee -> OrderCoffeeResponseDto
+                        .builder()
                         .coffeeId(orderCoffee.getCoffee().getCoffeeId())
                         .korName(orderCoffee.getCoffee().getKorName())
                         .engName(orderCoffee.getCoffee().getEngName())
                         .quantity(orderCoffee.getQuantity())
-                        .price(orderCoffee.getCoffee().getPrice()))
+                        .price(orderCoffee.getCoffee().getPrice())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

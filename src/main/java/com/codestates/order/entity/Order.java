@@ -35,9 +35,15 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
 
-
-    public void addMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
+    }
+
+    public void addOrderCoffee(OrderCoffee orderCoffee){
+        this.orderCoffees.add(orderCoffee);
+        if(orderCoffee.getOrder()!=this){
+            orderCoffee.addOrder(this);
+        }
     }
 
     public enum OrderStatus {

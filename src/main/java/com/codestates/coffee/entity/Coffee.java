@@ -45,6 +45,13 @@ public class Coffee {
     @OneToMany(mappedBy = "coffee")
     private List<OrderCoffee> orderCoffees = new ArrayList<>();
 
+    public void addOrderCoffee(OrderCoffee orderCoffee){
+        this.orderCoffees.add(orderCoffee);
+        if(orderCoffee.getCoffee() != this){
+            orderCoffee.addCoffee(this);
+        }
+    }
+
     // 커피 상태 추가
     public enum CoffeeStatus {
         COFFEE_FOR_SALE("판매중"),

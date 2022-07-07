@@ -45,6 +45,8 @@ public class OrderController {
                 new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.CREATED);
     }
 
+    // 스탬프 관련 로직 추가
+
     @PatchMapping("/{order-id}")
     public ResponseEntity patchOrder(@PathVariable("order-id") @Positive long orderId,
                                      @Valid @RequestBody OrderPatchDto orderPatchDto) {

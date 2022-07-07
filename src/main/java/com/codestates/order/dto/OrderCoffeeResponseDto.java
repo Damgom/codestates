@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-
+@Builder
 public class OrderCoffeeResponseDto {
     private long coffeeId;
     private String korName;
