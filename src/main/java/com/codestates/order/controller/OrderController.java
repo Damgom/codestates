@@ -1,6 +1,9 @@
 package com.codestates.order.controller;
 
 import com.codestates.coffee.service.CoffeeService;
+import com.codestates.member.Stamp;
+import com.codestates.member.entity.Member;
+import com.codestates.member.service.MemberService;
 import com.codestates.response.MultiResponseDto;
 import com.codestates.response.SingleResponseDto;
 import com.codestates.order.dto.OrderPatchDto;
@@ -26,13 +29,16 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
     private final CoffeeService coffeeService;
+    private final MemberService memberService;
 
     public OrderController(OrderService orderService,
                            OrderMapper mapper,
-                           CoffeeService coffeeService) {
+                           CoffeeService coffeeService,
+                           MemberService memberService) {
         this.orderService = orderService;
         this.mapper = mapper;
         this.coffeeService = coffeeService;
+        this.memberService = memberService;
     }
 
     @PostMapping
@@ -46,6 +52,19 @@ public class OrderController {
     }
 
     // 스탬프 관련 로직 추가
+    private void updateStamp(Order order) {
+        Member member = memberService.findMember(order.getMember().getMemberId());
+        int stampCount =
+                order.getOrderCoffees().stream()
+                        .map(orderCoffee -> orderCoffee.getQuantity())
+                        .mapToInt(quantity -> quantity)
+                        .sum();
+        Stamp stamp = member.getStamp();
+        stamp.setStampCount(stamp.getStampCount() + stampCount);
+        member.setStamp(stamp);
+
+        memberService.updateMember(member);
+    }
 
     @PatchMapping("/{order-id}")
     public ResponseEntity patchOrder(@PathVariable("order-id") @Positive long orderId,

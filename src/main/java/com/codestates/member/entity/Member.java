@@ -57,8 +57,11 @@ public class Member {
         this.phone = phone;
     }
 
-    public void addOrder(Order order) {
+    public void setOrder(Order order) {
         orders.add(order);
+        if(order.getMember() != this){
+            order.setMember(this);
+        }
     }
 
     public void setStamp(Stamp stamp) {

@@ -1,6 +1,5 @@
 package com.codestates.order.service;
 
-import com.codestates.coffee.entity.Coffee;
 import com.codestates.coffee.service.CoffeeService;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
@@ -98,5 +97,9 @@ public class OrderService {
                 .map(orderCoffee -> orderCoffee.getQuantity())
                 .mapToInt(quantity -> quantity)
                 .sum();
+    }
+
+    private Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
 }

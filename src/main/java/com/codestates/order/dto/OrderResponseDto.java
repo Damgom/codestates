@@ -12,6 +12,8 @@ import java.util.List;
 @Setter
 public class OrderResponseDto {
     private long orderId;
+
+    @Setter
     private long memberId;
     private Order.OrderStatus orderStatus;
     private List<OrderCoffeeResponseDto> orderCoffees;
