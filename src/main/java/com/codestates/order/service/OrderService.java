@@ -2,6 +2,8 @@ package com.codestates.order.service;
 
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
+import com.codestates.member.Stamp;
+import com.codestates.member.entity.Member;
 import com.codestates.member.service.MemberService;
 import com.codestates.order.entity.Order;
 import com.codestates.order.repository.OrderRepository;
@@ -71,5 +73,23 @@ public class OrderService {
                 optionalOrder.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.ORDER_NOT_FOUND));
         return findOrder;
+    }
+
+    // stamp 로직 추가
+    private void putStamp(Order order){
+        Member member = memberService.findMember(order.getMember().getMemberId());
+        int stampNum = stampCount(order);
+        Stamp stamp = member.getStamp();
+        stamp.setStampCount(stamp.getStampCount() + stampNum);
+        member.setStamp(stamp);
+        memberService.updateMember(member);
+    }
+
+    private int stampCount(Order order){
+        return order.getOrderCoffees()
+                .stream()
+                .map(orderCoffee -> orderCoffee.getQuantity())
+                .mapToInt(quantity -> quantity)
+                .sum();
     }
 }

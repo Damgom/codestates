@@ -42,8 +42,7 @@ public class OrderController {
         // TODO JPA 기능에 맞춰서 회원이 주문한 커피 정보를 ResponseEntity에 포함 시키세요.
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null)),
-                HttpStatus.CREATED);
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{order-id}")
@@ -55,7 +54,7 @@ public class OrderController {
 
         // patchOrder는 수정하지 마세요. 레퍼런스 코드에서 주문한 커피 정보가 포함 됩니다.
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null))
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order))
                 , HttpStatus.OK);
     }
     @GetMapping("/{order-id}")
@@ -65,7 +64,7 @@ public class OrderController {
         // TODO JPA 기능에 맞춰서 회원이 주문한 커피 정보를 ResponseEntity에 포함 시키세요.
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order, null)),
+                new SingleResponseDto<>(mapper.orderToOrderResponseDto(order)),
                 HttpStatus.OK);
     }
 

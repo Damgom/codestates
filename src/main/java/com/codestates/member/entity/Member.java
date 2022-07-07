@@ -63,6 +63,9 @@ public class Member {
 
     public void setStamp(Stamp stamp) {
         this.stamp = stamp;
+        if(stamp.getMember() != this){
+            stamp.setMember(this);
+        }
     }
 
     // 추가 된 부분

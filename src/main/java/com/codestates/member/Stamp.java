@@ -16,6 +16,7 @@ public class Stamp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stampId;
 
+    @Column(nullable = false)
     private int stampCount;
 
     @OneToOne
@@ -24,5 +25,8 @@ public class Stamp {
 
     public void setMember(Member member) {
         this.member = member;
+        if(member.getStamp() != this){
+            member.setStamp(this);
+        }
     }
 }
