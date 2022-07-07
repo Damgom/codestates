@@ -82,18 +82,18 @@ public class OrderService {
     }
 
     // stamp 로직 추가
-    private void putStamp(Order order){
+    private void updateStamp(Order order) {
         Member member = memberService.findMember(order.getMember().getMemberId());
-        int stampNum = stampCount(order);
+        int stampCount = calculateStampCount(order);
+
         Stamp stamp = member.getStamp();
-        stamp.setStampCount(stamp.getStampCount() + stampNum);
+        stamp.setStampCount(stamp.getStampCount() + stampCount);
         member.setStamp(stamp);
         memberService.updateMember(member);
     }
 
-    private int stampCount(Order order){
-        return order.getOrderCoffees()
-                .stream()
+    private int calculateStampCount(Order order) {
+        return order.getOrderCoffees().stream()
                 .map(orderCoffee -> orderCoffee.getQuantity())
                 .mapToInt(quantity -> quantity)
                 .sum();

@@ -28,7 +28,6 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
-    private final CoffeeService coffeeService;
     private final MemberService memberService;
 
     public OrderController(OrderService orderService,
@@ -37,7 +36,6 @@ public class OrderController {
                            MemberService memberService) {
         this.orderService = orderService;
         this.mapper = mapper;
-        this.coffeeService = coffeeService;
         this.memberService = memberService;
     }
 
