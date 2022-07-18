@@ -55,8 +55,8 @@ public class MemberControllerRestDocsTest {
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com", "홍길동", "010-1234-5678");
         String content = gson.toJson(post);
 
-        MemberDto.response responseDto =
-                new MemberDto.response(1L,
+        MemberDto.Response responseDto =
+                new MemberDto.Response(1L,
                         "hgd@gmail.com",
                         "홍길동",
                         "010-1234-5678",
@@ -116,8 +116,8 @@ public class MemberControllerRestDocsTest {
         MemberDto.Patch patch = new MemberDto.Patch(memberId, "홍길동", "010-1111-1111", Member.MemberStatus.MEMBER_ACTIVE);
         String content = gson.toJson(patch);
 
-        MemberDto.response responseDto =
-                new MemberDto.response(1L,
+        MemberDto.Response responseDto =
+                new MemberDto.Response(1L,
                         "hgd@gmail.com",
                         "홍길동",
                         "010-1111-1111",

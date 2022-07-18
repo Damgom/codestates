@@ -43,7 +43,7 @@ public class MemberController {
         member.setStamp(new Stamp()); // homework solution 추가
 
         Member createdMember = memberService.createMember(member);
-        MemberDto.response response = mapper.memberToMemberResponse(createdMember);
+        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(response),
                 HttpStatus.CREATED);
