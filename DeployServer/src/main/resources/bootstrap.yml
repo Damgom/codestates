@@ -2,5 +2,5 @@ aws:
   paramstore:
     enabled: true
     prefix: /spring-boot-aws
-    name: be-pair-000
+    name: be-pair-1
     profileSeparator: _
