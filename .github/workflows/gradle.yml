@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: Java CI with Gradle
 
 on:
@@ -15,7 +8,7 @@ permissions:
   contents: read
   
 env:
-  S3_BUCKET_NAME: be-pair-1
+  S3_BUCKET_NAME: be-pair-000
 
 jobs:
   build:
@@ -50,11 +43,11 @@ jobs:
     # 압축한 프로젝트를 S3로 전송합니다.
     - name: Upload to S3
       run: aws s3 cp --region ap-northeast-2 ./practice-deploy.zip s3://$S3_BUCKET_NAME/practice-deploy.zip
-
-        # CodeDeploy에게 배로 명령을 내립니다.
-   - name: Code Deploy
-     run: >
-       aws deploy create-deployment --application-name be-pair-1
-       --deployment-config-name CodeDeployDefault.AllAtOnce
-       --deployment-group-name be-pair-1-group
-       --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=practice-deploy.zip
+    
+    # CodeDeploy에게 배로 명령을 내립니다.
+    - name: Code Deploy
+      run: >
+        aws deploy create-deployment --application-name be-pair-1
+        --deployment-config-name CodeDeployDefault.AllAtOnce
+        --deployment-group-name be-pair-1-group
+        --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=practice-deploy.zip
