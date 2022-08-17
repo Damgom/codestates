@@ -12,5 +12,8 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query(value = "SELECT m FROM Member m WHERE m.companyType = :typeCode and m.companyLocation =:locationCode")
-    List<Member> findLocationAndType(String typeCode, String locationCode);
+    List<Member> findType(String typeCode);
+
+    @Query(value = "SELECT m FROM Member m WHERE m.companyType = :typeCode and m.companyLocation =:locationCode")
+    List<Member> findLocation(String locationCode);
 }

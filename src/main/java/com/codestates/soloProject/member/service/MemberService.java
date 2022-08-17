@@ -29,8 +29,8 @@ public class MemberService {
         return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
 
-    public List<Member> findMembersBylocation(String location){
-        Optional<List<Member>> optionalMember = memberRepository.findLocationAndType(location);
+    public List<Member> findMembersByLocation(String location){
+        Optional<List<Member>> optionalMember = Optional.ofNullable(memberRepository.findLocation(location));
 
         List<Member> members = optionalMember.orElseThrow();
 
@@ -38,7 +38,7 @@ public class MemberService {
     }
 
     public List<Member> findMembersByType(String type){
-        Optional<List<Member>> optionalMember = memberRepository.findLocationAndType(type);
+        Optional<List<Member>> optionalMember = Optional.ofNullable(memberRepository.findType(type));
         List<Member> members = optionalMember.orElseThrow();
 
         return members;
