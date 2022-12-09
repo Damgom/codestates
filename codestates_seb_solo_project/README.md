@@ -1,0 +1,1 @@
+# codestates_seb_solo_project
